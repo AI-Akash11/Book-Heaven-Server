@@ -23,9 +23,15 @@ async function run() {
   try {
     await client.connect();
 
+    const db = client.db('book_heaven')
+    const booksCollection = db.collection('books')
 
+    // books api
 
-
+    app.get('/books',async (req, res)=>{
+        const result = await booksCollection.find().toArray();
+        res.send(result)
+    })
 
 
 
