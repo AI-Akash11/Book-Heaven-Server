@@ -33,6 +33,11 @@ async function run() {
         res.send(result)
     })
 
+    app.get('/latest-books', async(req, res)=>{
+      const result = await booksCollection.find().sort({created_at: -1}).limit(6).toArray();
+      res.send(result)
+    })
+
     app.get('/books/:id', async (req, res) =>{
       const {id} =req.params;
       const objectId = new ObjectId(id);
